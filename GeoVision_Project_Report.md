@@ -11,11 +11,34 @@ The purpose of this Software Requirements Specification (SRS) document is to spe
 ### 1.2 Explain the Project
 GeoVision is a robust, full-stack environmental monitoring platform that leverages Artificial Intelligence and real-time satellite imagery to detect and track global ecological threats. Instead of relying on manual field surveys, GeoVision autonomously ingests multispectral data from the European Space Agency's Sentinel-2 satellites. It processes this data to compute critical environmental indices (NDVI for vegetation, NDWI for water) and utilizes a deep learning Convolutional Neural Network (CNN) to classify land-use patterns.
 
-The ultimate goal of GeoVision is to democratize geospatial intelligence. It transforms raw satellite data into an accessible, interactive dashboard that alerts policymakers, NGOs, and local authorities to emerging crises like deforestation, urban heat islands, and flooding before they escalate.
+### 1.3 User Classes and Characteristics
+1. **Environmental Analysts / Scientists:** Use the platform for in-depth data visualization and NDVI/NDWI trend analysis.
+2. **Emergency First Responders:** Utilize the Action Center for disaster evacuation planning and resource dispatch.
+3. **NGOs & Policymakers:** Use the Automated PDF Impact Reports for funding and mandate justifications.
+4. **Community Volunteers / Rangers:** Provide on-the-ground validation through the Community Portal.
 
 ---
 
-## 2. Overall Description & Implementation (How We Implemented It)
+## 2. System Architecture & Technical Diagrams
+
+### 2.1 System Architecture Overview
+The platform follows a decoupled microservices architecture. The React frontend communicates with the FastAPI backend via RESTful APIs, while Supabase provides identity management and persistence.
+
+![System Architecture](docs/diagram1_system_architecture_1772012214594.png)
+
+### 2.2 Satellite Data Processing Pipeline
+The ingestion pipeline handles multispectral data acquisition, spectral index computation (NDVI/NDWI), and CNN patch extraction in parallel.
+
+![Data Pipeline](docs/diagram2_satellite_pipeline_1772012241423.png)
+
+### 2.3 ResNet-50 AI Architecture
+We implemented a 50-layer Residual Network (ResNet) with a custom classification head. Transfer learning from ImageNet-1K weights ensures high accuracy even on smaller satellite datasets.
+
+![AI Architecture](docs/diagram3_resnet50_architecture_1772012280777.png)
+
+---
+
+## 3. Overall Description & Implementation (How We Implemented It)
 
 ### 2.1 How We Implemented It
 The platform was engineered using a modern microservices architecture, splitting responsibilities between a highly responsive frontend, a scalable backend, and an AI inference engine:
@@ -25,7 +48,19 @@ The platform was engineered using a modern microservices architecture, splitting
 3. **Frontend Dashboard:** A React 18 application built with TypeScript, Tailwind CSS, and shadcn/ui. It communicates with the backend to display Recharts-powered analytics and dynamic UI cards.
 4. **Authentication & Database:** We integrated Supabase (PostgreSQL) for secure JWT-based Google OAuth authentication, Row-Level Security (RLS), and persistent storage of active environmental alerts and regional histories.
 
-### 2.2 System Features (Real-World Problem Solving)
+### 3.1 Functional Requirements Table
+
+| ID | Feature | Description |
+|----|---------|-------------|
+| FR-01 | **Automated Ingestion** | System fetches Sentinel-2 multispectral tiles every 24 hours. |
+| FR-02 | **CNN Land-Use** | AI classifies extracted patches into 10 distinct land-use categories. |
+| FR-03 | **Spectral Indices** | Calculates NDVI and NDWI to detect vegetation stress and flooding. |
+| FR-04 | **PDF Reporting** | Generates professional, branded PDF impact reports from live data. |
+| FR-05 | **Resource Dispatch** | UI for assigning emergency units to high-risk zones. |
+| FR-06 | **Predictive Analytics** | Forecasts 6-month environmental risk trajectories using time-series data. |
+| FR-07 | **Ground-Truthing** | Allows authorized users to upload mobile photos for alert validation. |
+
+### 3.2 System Features (Real-World Problem Solving)
 - **CNN Land-Use Classification**: Identifies geographical environments with 92.5% accuracy.
 - **Action Center**:
   - Disaster Evacuation Planner (calculates safe zones).
