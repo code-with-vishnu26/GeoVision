@@ -1,20 +1,64 @@
-# 🌍 GeoVision — AI-Powered Earth Intelligence Platform
+<h1 align="center">🌍 GeoVision — AI-Powered Earth Intelligence Platform</h1>
 
-Real-time satellite-driven environmental risk monitoring using deep learning and Sentinel-2 multispectral imagery.
+## 📖 1. Project Overview (Explain the Project)
 
-## ✨ Features
+GeoVision is a comprehensive, full-stack environmental monitoring platform that leverages Artificial Intelligence and real-time satellite imagery to detect and track global ecological threats. Instead of relying on manual field surveys, GeoVision autonomously ingests multispectral data from the European Space Agency's Sentinel-2 satellites. It processes this data to compute critical environmental indices (NDVI for vegetation, NDWI for water) and utilizes a deep learning Convolutional Neural Network (CNN) to classify land-use patterns.
 
-- **CNN Land-Use Classification** — ResNet-50 trained on EuroSAT (27,000 images, 10 classes, 92.5% accuracy)
-- **NDVI / NDWI Analysis** — Vegetation health and water body detection from spectral bands
-- **Automated Monitoring** — 24-hour cycle tracking 6 critical global regions
-- **Real-Time Alerts** — Risk engine detects deforestation, flooding, heat islands, and pollution
-- **Interactive Dashboard** — Live charts, regional monitoring table, and risk scores
-- **Upload & Classify** — Drag-and-drop satellite image analysis (JPG, PNG, GeoTIFF)
-- **Google OAuth** — Secure authentication via Supabase with JWT and RBAC
+The ultimate goal of GeoVision is to democratize geospatial intelligence. It transforms raw satellite data into an accessible, interactive dashboard that alerts policymakers, NGOs, and local authorities to emerging crises like deforestation, urban heat islands, and flooding before they escalate.
 
-## 🌍 Real-World Problem Solving
+## ⚙️ 2. How We Implemented It
+
+The platform was engineered using a modern microservices architecture, splitting responsibilities between a highly responsive frontend, a scalable backend, and an AI inference engine:
+
+- **AI Model Training:** We utilized PyTorch to train a ResNet-50 CNN on the EuroSAT dataset (27,000 satellite images across 10 classes). Using transfer learning techniques with a frozen backbone, the model achieved a 92.5% validation accuracy in classifying land-use environments.
+- **Backend Architecture:** Built with Python (FastAPI), the backend handles the heavy lifting. It connects to the Sentinel Hub API to fetch live multispectral L2A GeoTIFFs, processes them using `rasterio` and NumPy, and feeds the localized patches to the PyTorch model for real-time inference.
+- **Frontend Dashboard:** A React 18 application built with TypeScript, Tailwind CSS, and shadcn/ui. It communicates with the backend to display Recharts-powered analytics and dynamic UI cards.
+- **Authentication & Database:** We integrated Supabase (PostgreSQL) for secure JWT-based Google OAuth authentication, Row-Level Security (RLS), and persistent storage of active environmental alerts and regional histories.
+
+## 📸 3. Images and Screenshots
+
+*(Add your actual screenshots here by bringing the images into the repository and replacing the paths!)*
+- **Landing Page & Dashboard:** `![Dashboard](docs/dashboard.png)`
+- **Upload & Classify Interface:** `![Upload Interface](docs/upload.png)`
+- **Action Center & Impact PDF Exports:** `![Action Center](docs/action-center.png)`
+- **Predictive Analytics & Charts:** `![Analytics](docs/analytics.png)`
+
+## 🔄 4. System Workflow
+
+The entire lifecycle of the GeoVision platform runs on a 24-hour automated cycle:
+1. **Trigger:** The APScheduler in the FastAPI backend initiates the daily monitoring job.
+2. **Ingestion:** The system authenticates with the Sentinel Hub API and downloads the latest multispectral tiles (B2, B3, B4, B8) for 6 critical coordinate zones.
+3. **Analysis:** The pipeline computes the Normalized Difference Vegetation Index (NDVI) and Water Index (NDWI), whilst simultaneously extracting 224x224 patches for the ResNet-50 deep learning model.
+4. **Assessment & Alerting:** The custom Risk Engine aggregates the CNN classifications and spectral indices. If critical thresholds are breached (e.g., severe NDVI drop indicating deforestation), high-priority alerts are dispatched to the Supabase database.
+5. **Visualization:** The React dashboard fetches the newly minted alerts in real-time, displaying them to the user via interactive charts and actionable mitigation tools.
+
+## 📁 5. Project Structure
+
+```text
+gsis-main/
+├── src/                          # React frontend
+│   ├── pages/                    # Dashboard, Upload, Analytics, Action Center
+│   ├── components/               # UI components (shadcn/ui, AppSidebar)
+│   ├── services/                 # API client, utilities
+│   └── integrations/supabase/    # Supabase client & types
+├── gsis-backend/                 # FastAPI backend
+│   ├── app/
+│   │   ├── routers/              # API REST endpoints
+│   │   ├── services/             # CNN Inference, NDVI, Sentinel fetcher
+│   │   ├── models/               # Pydantic data models
+│   │   └── core/                 # Config, security, database connectors
+│   └── models/                   # Trained PyTorch model weights (.pt)
+├── geo-vision-training/          # ML Training scripts
+│   ├── train.py                  # ResNet-50 transfer learning script
+│   └── download_eurosat.py       # Dataset downloader
+├── supabase/                     # Database migrations
+└── public/                       # Static public assets
+```
+
+## ✨ 6. Real-World Problem Solving Features
 
 GeoVision is designed with a suite of advanced features to provide tangible solutions to the environmental threats it monitors:
+
 - **Action Center** — A dedicated module for real-world mitigation.
   - **Disaster Evacuation Planner** — Calculates safe zones and optimal evacuation routes for communities facing active disasters.
   - **Automated PDF Impact Reports** — Generates official, downloadable PDF reports of carbon offsets and mitigations for policymakers.
@@ -24,139 +68,11 @@ GeoVision is designed with a suite of advanced features to provide tangible solu
 - **Predictive Forward-Modeling** — Utilizes historical time-series data to forecast 6-month environmental degradation trajectories (e.g., drought risk, temperature rise).
 - **Community Ground-Truthing Portal** — A crowdsourced reporting interface allowing local volunteers to upload photographic evidence to validate or dismiss AI-generated satellite alerts.
 
-## 🛰 Monitored Regions
-
-| Region | Coordinates | Primary Risk |
-|--------|------------|--------------|
-| Amazon Basin | -3.47°, -62.22° | Deforestation |
-| Congo Basin | 0.00°, 22.00° | Forest Loss |
-| Ganges Delta | 22.00°, 90.00° | Flooding |
-| Lake Chad | 13.00°, 14.50° | Water Scarcity |
-| Borneo Rainforest | 1.00°, 114.00° | Deforestation |
-| Great Barrier Reef | -18.00°, 147.00° | Marine Degradation |
-
-## 🧠 Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts |
-| Backend | Python 3.12, FastAPI, Uvicorn |
-| AI/ML | PyTorch, torchvision (ResNet-50), NumPy, Pillow |
-| Database | Supabase (PostgreSQL), Row-Level Security |
-| Auth | Google OAuth 2.0, JWT (HS256) |
-| Satellite Data | Sentinel Hub API, Sentinel-2 L2A |
-| Image Processing | rasterio, Pillow |
-| Scheduler | APScheduler (24-hour cycle) |
-| Deployment | Vercel (frontend), Render (backend) |
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ & npm
-- Python 3.12+
-- Supabase account
-- Sentinel Hub API credentials (optional)
-
-### Frontend
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-```
-
-### Backend
-
-```bash
-cd gsis-backend
-
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create .env file with:
-# SUPABASE_URL=your_supabase_url
-# SUPABASE_SERVICE_KEY=your_service_key
-# SUPABASE_JWT_SECRET=your_jwt_secret
-# SENTINEL_CLIENT_ID=your_sentinel_id
-# SENTINEL_CLIENT_SECRET=your_sentinel_secret
-
-# Run server
-python -m uvicorn app.main:app --reload
-```
-
-### CNN Training (optional)
-
-```bash
-cd geo-vision-training
-
-# Download EuroSAT dataset
-python download_eurosat.py
-
-# Train model
-python train.py
-
-# Copy trained model to backend
-copy landuse_model.pt ..\gsis-backend\models\
-```
-
-## 📁 Project Structure
-
-```
-gsis-main/
-├── src/                          # React frontend
-│   ├── pages/                    # Dashboard, Upload, Analytics, Auth
-│   ├── components/               # UI components
-│   ├── services/                 # API client, utilities
-│   └── integrations/supabase/    # Supabase client & types
-├── gsis-backend/                 # FastAPI backend
-│   ├── app/
-│   │   ├── routers/              # API endpoints
-│   │   ├── services/             # CNN, NDVI, NDWI, Heat, Sentinel
-│   │   ├── models/               # Data models
-│   │   └── core/                 # Config, security, database
-│   └── models/                   # Trained model weights (.pt)
-├── geo-vision-training/          # CNN training scripts
-│   ├── train.py                  # ResNet-50 transfer learning
-│   └── download_eurosat.py       # Dataset downloader
-├── supabase/                     # Database migrations
-└── public/                       # Static assets
-```
-
-## 📊 Model Performance
-
-| Metric | Value |
-|--------|-------|
-| Architecture | ResNet-50 (frozen backbone + custom head) |
-| Dataset | EuroSAT (27,000 images, 10 classes) |
-| Validation Accuracy | **92.5%** |
-| Training Time | ~4 hours (CPU) |
-| Model Size | ~94 MB |
-
-## 🐛 Challenges & Solutions
-
-*(This section highlights real-world technical problems encountered during development and how they were resolved).*
+## 🐛 7. Challenges & Solutions
 
 | Challenge / Error | Solution Implemented |
 |-------------------|----------------------|
-| **Sentinel Hub API Rate Limiting (HTTP 429)**<br>The 24-hour monitoring cycle rapidly exhausted free-tier API request quotas. | Implemented a robust fallback mechanism that caches the last known satellite data and seamlessly switches to a deterministic simulation mode when the API limit is reached. |
-| **CNN Out-Of-Memory (OOM) on GeoTIFFs**<br>Loading massive multi-spectral satellite images for inference crashed the FastAPI backend due to RAM exhaustion. | Developed a sliding-window patch extractor using `rasterio` to slice large images into 224×224 tensors processing them sequentially rather than loading the full array into memory. |
-| **Class Imbalance in Training Data**<br>The ResNet model struggled to differentiate minority classes (e.g., *Industrial* vs. *Residential*). | Applied Weighted Cross-Entropy Loss during PyTorch training to penalize misclassifications of minority classes more heavily, boosting overall accuracy. |
-| **Supabase JWT Token Expiration**<br>Continuous dashboard polling requests failed abruptly when the auth token expired after 1 hour. | Implemented a silent token refresh interceptor in the React frontend leveraging the Supabase `onAuthStateChange` background listener. |
-
-## 📝 License
-
-This project is for academic/educational purposes.
-
-## 🙏 Acknowledgments
-
-- [EuroSAT Dataset](https://github.com/phelber/EuroSAT) — Helber et al.
-- [Sentinel Hub](https://www.sentinel-hub.com/) — Satellite data API
-- [Supabase](https://supabase.com/) — Backend-as-a-Service
-- [PyTorch](https://pytorch.org/) — Deep learning framework
+| **Sentinel Hub API Rate Limiting (HTTP 429)** | Implemented a robust fallback mechanism that caches the last known satellite data and seamlessly switches to a deterministic simulation mode when the API limit is reached. |
+| **CNN Out-Of-Memory (OOM) on GeoTIFFs** | Developed a sliding-window patch extractor using `rasterio` to slice large images into 224×224 tensors processing them sequentially rather than loading the full array into memory. |
+| **Class Imbalance in Training Data** | Applied Weighted Cross-Entropy Loss during PyTorch training to penalize misclassifications of minority classes more heavily, boosting overall accuracy to 92.5%. |
+| **Supabase JWT Token Expiration** | Implemented a silent token refresh interceptor in the React frontend leveraging the Supabase `onAuthStateChange` background listener. |
