@@ -31,10 +31,17 @@ The ingestion pipeline handles multispectral data acquisition, spectral index co
 
 ![Data Pipeline](docs/diagram2_satellite_pipeline_1772012241423.png)
 
-### 2.3 ResNet-50 AI Architecture
-We implemented a 50-layer Residual Network (ResNet) with a custom classification head. Transfer learning from ImageNet-1K weights ensures high accuracy even on smaller satellite datasets.
+### 2.3 Authentication and Security Flow
+Security is managed via Supabase Auth with Google OAuth. The system uses JWT tokens with HS256 signing for all backend requests.
+
+![Authentication Flow](docs/diagram4_authentication_flow_1772012291451.png)
+
+### 2.4 ResNet-50 AI Architecture & Training
+We implemented a 50-layer Residual Network (ResNet). The training pipeline utilizes a weighted cross-entropy loss to handle class imbalance in the EuroSAT dataset.
 
 ![AI Architecture](docs/diagram3_resnet50_architecture_1772012280777.png)
+
+![CNN Training Pipeline](docs/diagram5_cnn_training_pipeline_1772012303779.png)
 
 ---
 
