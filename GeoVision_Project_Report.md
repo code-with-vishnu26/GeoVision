@@ -87,13 +87,11 @@ gsis-main/
 
 ## 6. Screenshots and Images
 
-*(Replace the mock paths below with your actual project snapshots)*
-
 - **Landing Page & Dashboard:**
-  `![Dashboard UI Screenshot](docs/dashboard.png)`
+  ![Dashboard UI Screenshot](docs/dashboard_full_1772010975963.png)
 - **Upload & Classify Interface:**
-  `![Upload & Classify UI Screenshot](docs/upload.png)`
+  ![Upload & Classify UI Screenshot](docs/upload_page_1772010986869.png)
 - **Action Center & Predictive Analytics:**
-  `![Action Center & Analytics Screenshot](docs/action-center-analytics.png)`
-- **Community Ground-Truthing Portal:**
-  `![Community Portal Screenshot](docs/community.png)`
+  ![Action Center & Analytics Screenshot](docs/analytics_page_1772010996067.png)
+- **Authentication & Sign-In:**
+  ![Sign-In Page Screenshot](docs/signin_page_1772010757014.png)

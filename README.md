@@ -17,11 +17,14 @@ The platform was engineered using a modern microservices architecture, splitting
 
 ## 📸 3. Images and Screenshots
 
-*(Add your actual screenshots here by bringing the images into the repository and replacing the paths!)*
-- **Landing Page & Dashboard:** `![Dashboard](docs/dashboard.png)`
-- **Upload & Classify Interface:** `![Upload Interface](docs/upload.png)`
-- **Action Center & Impact PDF Exports:** `![Action Center](docs/action-center.png)`
-- **Predictive Analytics & Charts:** `![Analytics](docs/analytics.png)`
+- **Landing Page & Dashboard:**
+  ![Dashboard](docs/dashboard_full_1772010975963.png)
+- **Upload & Classify Interface:**
+  ![Upload Interface](docs/upload_page_1772010986869.png)
+- **Action Center & Analytics:**
+  ![Analytics](docs/analytics_page_1772010996067.png)
+- **Authentication Gateway:**
+  ![Sign-In](docs/signin_page_1772010757014.png)
 
 ## 🔄 4. System Workflow
 
