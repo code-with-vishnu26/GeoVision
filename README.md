@@ -15,6 +15,12 @@ The platform was engineered using a modern microservices architecture, splitting
 - **Frontend Dashboard:** A React 18 application built with TypeScript, Tailwind CSS, and shadcn/ui. It communicates with the backend to display Recharts-powered analytics and dynamic UI cards.
 - **Authentication & Database:** We integrated Supabase (PostgreSQL) for secure JWT-based Google OAuth authentication, Row-Level Security (RLS), and persistent storage of active environmental alerts and regional histories.
 
+### 📐 System Architecture & Data Pipeline
+
+![System Architecture](docs/diagram1_system_architecture_1772012214594.png)
+
+![Data Pipeline](docs/diagram2_satellite_pipeline_1772012241423.png)
+
 ## 📸 3. Images and Screenshots
 
 - **Landing Page & Dashboard:**
@@ -58,18 +64,17 @@ gsis-main/
 └── public/                       # Static public assets
 ```
 
-## ✨ 6. Real-World Problem Solving Features
-
-GeoVision is designed with a suite of advanced features to provide tangible solutions to the environmental threats it monitors:
-
-- **Action Center** — A dedicated module for real-world mitigation.
-  - **Disaster Evacuation Planner** — Calculates safe zones and optimal evacuation routes for communities facing active disasters.
-  - **Automated PDF Impact Reports** — Generates official, downloadable PDF reports of carbon offsets and mitigations for policymakers.
-  - **Resource Allocation Dashboard** — An interactive dispatch interface to assign medical and aviation emergency resources to critical zones.
-  - **ReliefWeb NGO Integration** — Fetches live disaster data from the United Nations OCHA API to cross-reference satellite alerts.
-  - **Emergency Broadcast** — Simulates an early warning system that dispatches SMS/Email alerts to local authorities.
-- **Predictive Forward-Modeling** — Utilizes historical time-series data to forecast 6-month environmental degradation trajectories (e.g., drought risk, temperature rise).
 - **Community Ground-Truthing Portal** — A crowdsourced reporting interface allowing local volunteers to upload photographic evidence to validate or dismiss AI-generated satellite alerts.
+
+## 📋 Functional Requirements
+
+| Feature | Description |
+|---------|-------------|
+| **Satellite Monitoring** | 24-hour automated multispectral data ingestion from Sentinel-2. |
+| **AI Classification** | ResNet-50 CNN identifies land-use with 92.5% accuracy. |
+| **Environmental Indeces** | Computes NDVI (Vegetation) and NDWI (Water) in real-time. |
+| **Actionable Tools** | Evacuation planning, PDF reports, and NGO API integrations. |
+| **Secure Access** | Google OAuth authentication with JWT-protected API routes. |
 
 ## 🐛 7. Challenges & Solutions
 
