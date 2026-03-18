@@ -1,0 +1,62 @@
+﻿
+> vite_react_shadcn_ts@0.0.0 build
+> vite build
+
+[36mvite v5.4.19 [32mbuilding for production...[36m[39m
+transforming...
+node.exe : Browserslist: browsers data (caniuse-lite) is 9 months old. 
+Please run:
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Browserslist: b...ld. Please 
+    run::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  npx update-browserslist-db@latest
+  Why you should do it regularly: 
+https://github.com/browserslist/update-db#readme
+[32mΓ£ô[39m 2981 modules transformed.
+[31mx[39m Build failed in 3.29s
+[31merror during build:
+[31msrc/pages/ActionCenter.tsx (2:127): "Helicopter" is not exported by 
+"node_modules/lucide-react/dist/esm/lucide-react.js", imported by 
+"src/pages/ActionCenter.tsx".[31m
+file: [36mC:/Users/jilla/Desktop/Courses/Projects/GeoVision-main/src/page
+s/ActionCenter.tsx:2:127[31m
+[33m
+1: import { useState, useRef, useEffect } from "react";
+2: import { Zap, Map, Route as RouteIcon, ShieldAlert, Trees, Send, 
+ChevronRight, AlertTriangle, CheckCircle2, Activity, Helipad, 
+Helicopter...
+                                                                          
+                                                        ^
+3: import html2canvas from "html2canvas";
+4: import { jsPDF } from "jspdf";
+[31m
+    at getRollupError (file:///C:/Users/jilla/Desktop/Courses/Projects/Geo
+Vision-main/node_modules/rollup/dist/es/shared/parseAst.js:395:41)
+    at error (file:///C:/Users/jilla/Desktop/Courses/Projects/GeoVision-ma
+in/node_modules/rollup/dist/es/shared/parseAst.js:391:42)
+    at Module.error (file:///C:/Users/jilla/Desktop/Courses/Projects/GeoVi
+sion-main/node_modules/rollup/dist/es/shared/node-entry.js:15535:16)
+    at Module.traceVariable (file:///C:/Users/jilla/Desktop/Courses/Projec
+ts/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.js:15984:2
+9)
+    at ModuleScope.findVariable (file:///C:/Users/jilla/Desktop/Courses/Pr
+ojects/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.js:137
+70:39)
+    at ReturnValueScope.findVariable (file:///C:/Users/jilla/Desktop/Cours
+es/Projects/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.j
+s:5252:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/jilla/Desktop/Cour
+ses/Projects/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.
+js:5252:38)
+    at Identifier.bind (file:///C:/Users/jilla/Desktop/Courses/Projects/Ge
+oVision-main/node_modules/rollup/dist/es/shared/node-entry.js:5035:40)
+    at CallExpression.bind (file:///C:/Users/jilla/Desktop/Courses/Project
+s/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.js:2851:28)
+    at CallExpression.bind (file:///C:/Users/jilla/Desktop/Courses/Project
+s/GeoVision-main/node_modules/rollup/dist/es/shared/node-entry.js:11235:15
+)[39m

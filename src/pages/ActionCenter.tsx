@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Zap, Map, Route as RouteIcon, ShieldAlert, Trees, Send, ChevronRight, AlertTriangle, CheckCircle2, Activity, Helipad, Helicopter, Users, Stethoscope, Download, Globe2, ExternalLink } from "lucide-react";
+import { Zap, Map, Route as RouteIcon, ShieldAlert, Trees, Send, ChevronRight, AlertTriangle, CheckCircle2, Activity, Navigation, Plane, Users, Heart, Download, Globe2, ExternalLink } from "lucide-react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
@@ -136,7 +136,7 @@ const ActionCenter = () => {
             activeTab === "dispatch" ? "bg-secondary text-primary border-b-2 border-primary" : "text-muted-foreground hover:bg-secondary/50"
           }`}
         >
-          <Helicopter className="h-4 w-4" /> Resource Dispatch
+          <Plane className="h-4 w-4" /> Resource Dispatch
         </button>
         <button
           onClick={() => setActiveTab("emergency")}
@@ -310,7 +310,7 @@ const ActionCenter = () => {
           <div className="glass-card-solid overflow-hidden">
             <div className="p-4 border-b border-border flex items-center justify-between bg-primary/5">
               <div className="flex items-center gap-2">
-                <Helicopter className="h-5 w-5 text-primary" />
+                <Plane className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-foreground">Emergency Resource Allocation</h3>
               </div>
               <span className="text-xs text-muted-foreground">Drag/Select to assign units</span>
@@ -334,7 +334,7 @@ const ActionCenter = () => {
                           assignedResources[alert.id] === "Medical" ? "bg-red-500/20 text-red-400 border-red-500/30" : "bg-background border-border hover:bg-secondary text-muted-foreground"
                         }`}
                       >
-                        <Stethoscope className="h-3 w-3" /> Medical Team
+                        <Heart className="h-3 w-3" /> Medical Team
                       </button>
                       <button 
                         onClick={() => assignResource(alert.id, "Aviation")}
@@ -342,7 +342,7 @@ const ActionCenter = () => {
                           assignedResources[alert.id] === "Aviation" ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "bg-background border-border hover:bg-secondary text-muted-foreground"
                         }`}
                       >
-                        <Helipad className="h-3 w-3" /> Aviation Unit
+                        <Navigation className="h-3 w-3" /> Aviation Unit
                       </button>
                       <button 
                          onClick={() => assignResource(alert.id, "Evac")}
