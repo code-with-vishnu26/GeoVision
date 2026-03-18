@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pillow
+numpy
+python-multipart
+python-jose[cryptography]
+slowapi
+rasterio
+psutil
+pydantic-settings
+apscheduler
+requests
+supabase
+torch
+torchvision

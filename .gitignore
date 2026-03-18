@@ -1,0 +1,56 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables — NEVER commit secrets
+.env
+.env.*
+!.env.example
+gsis-backend/.env
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+
+# Data files
+gsis-backend/data/
+*.tif
+*.tiff
+
+# Model weights (large binary files)
+*.pt
+*.pth
+gsis-backend/models/*.pt
+
+# Training data (too large for GitHub)
+geo-vision-training/data/
+geo-vision-training/eurosat_dl/
+
+# Generated files
+*.docx
+mermaid_diagrams.html
+convert_to_docx.py
